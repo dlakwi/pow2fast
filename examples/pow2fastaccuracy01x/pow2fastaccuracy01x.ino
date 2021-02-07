@@ -1,6 +1,6 @@
 // fpow2accuracy01x.ino
 
-// test 10 random float values in the range 0.0 to +1.0
+// test 10 float values in the range 0.0 to +1.0
 
 #include <Arduino.h>
 #include <avr/pgmspace.h>
@@ -24,8 +24,6 @@ void setup( void )
   while ( !Serial ) delay( 1 );
   Serial.println( "pow2fast accuracy - 10 floats [0.0 .. 1.0)" );
 
-  randomSeed( analogRead( A0 ) * analogRead( A4 ) );
-
   for ( int i = 0; i < 10; i++ )
   {
     value[i] = float( i ) / 10.0;
@@ -42,8 +40,8 @@ void setup( void )
     p0 = pow( 2.0, value[i] );
     p1 = pow2fast( value[i] );
     diff[i] = p0 - p1;
-    printD( i );
 
+    printD( i );
     dtostrf(       value[i], 11, 5, &str[0] ); Serial.print( str );
     dtostrf(       p0,       11, 5, &str[0] ); Serial.print( str );
     dtostrf(       p1,       13, 5, &str[0] ); Serial.print( str );
